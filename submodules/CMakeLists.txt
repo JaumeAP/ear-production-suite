@@ -187,7 +187,12 @@ set(BEAR_UNIT_TESTS OFF CACHE BOOL "bear unit tests" FORCE)
 set(BEAR_DOWNLOAD_DATA_DEFAULT OFF CACHE BOOL "bear data files" FORCE)
 set(BEAR_DOWNLOAD_DATA_DEFAULT_SMALL ON CACHE BOOL "bear data files" FORCE)
 set(BEAR_VISR_LIB_TYPE "${VISR_TARGET_TYPE}" CACHE STRING "bear visr lib type" FORCE)
-add_subdirectory(bear/visr_bear)
+# libear (bear's own submodule) defaults its Accelerate/vDSP FFT to OFF, since
+# merely linking Accelerate measurably changes KissFFT's floating-point
+# rounding elsewhere in the process. The monitoring plugin's decorrelator
+# convolver wants it (see MultichannelConvolver), so opt in here.
+set(EAR_USE_VDSP ON CACHE BOOL "libear vDSP FFT" FORCE)
+add_subdirectory(bear-macOS/visr_bear)
 set_target_properties(bear PROPERTIES FOLDER submodules/bear)
 set_target_properties(ear PROPERTIES FOLDER submodules/libear)
 # Folder up instruction-set specific targets (platform specific so need to check exists)
