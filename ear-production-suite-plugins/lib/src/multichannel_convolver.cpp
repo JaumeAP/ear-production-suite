@@ -6,8 +6,13 @@ namespace plugin {
 MultichannelConvolver::MultichannelConvolver(
     std::vector<std::vector<float>> filters, std::size_t blockSize)
     : blockSize_(blockSize) {
+#ifdef EAR_HAS_VDSP
+  auto context =
+      dsp::block_convolver::Context(blockSize, ear::get_fft_vdsp<float>());
+#else
   auto context =
       dsp::block_convolver::Context(blockSize, ear::get_fft_kiss<float>());
+#endif
 
   for (const auto& filterVector : filters) {
     dsp::block_convolver::Filter filter(context, filterVector.size(),
