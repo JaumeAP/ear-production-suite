@@ -33,9 +33,9 @@
 [submodule "submodules/Catch2"]
 	path = submodules/Catch2
 	url = https://github.com/catchorg/Catch2.git
-[submodule "submodules/bear"]
-	path = submodules/bear
-	url = https://github.com/JaumeAP/bear.git
+[submodule "submodules/bear-macOS"]
+	path = submodules/bear-macOS
+	url = https://github.com/JaumeAP/bear-macOS.git
 [submodule "submodules/adm_coordinate_conversion"]
 	path = submodules/adm_coordinate_conversion
 	url = https://github.com/ebu/adm_coordinate_conversion.git
